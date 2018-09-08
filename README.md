@@ -1,4 +1,4 @@
-# BinanceDotNet <img src="https://i.imgur.com/x2YPVe6.png" width="56" />
+# Fork BinanceDotNet adaptive for MDG  <img src="https://i.imgur.com/x2YPVe6.png" width="56" />
 
 ## C# Wrapper for the official Binance exchange API
 <img src="https://img.shields.io/nuget/dt/BinanceDotNet.svg" />
