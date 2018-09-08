@@ -23,5 +23,16 @@
             
             return allPairs = string.Join("", allPairsArray);
         }
+
+        public static string CombinedTrade(string allPairs)
+        {
+            string[] allPairsArray = allPairs.Split(',');
+            for (int i = 0; i < allPairsArray.Length; i++)
+            {
+                allPairsArray[i] = allPairsArray[i].ToLower() + "@aggTrade" + "/";
+            }
+
+            return allPairs = string.Join("", allPairsArray);
+        }
     }
 }
