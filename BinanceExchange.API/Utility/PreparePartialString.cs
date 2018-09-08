@@ -29,7 +29,7 @@
             string[] allPairsArray = allPairs.Split(',');
             for (int i = 0; i < allPairsArray.Length; i++)
             {
-                allPairsArray[i] = allPairsArray[i].ToLower() + "@aggTrade" + "/";
+                allPairsArray[i] = allPairsArray[i].ToLower() + "@trade" + "/";
             }
 
             return allPairs = string.Join("", allPairsArray);
