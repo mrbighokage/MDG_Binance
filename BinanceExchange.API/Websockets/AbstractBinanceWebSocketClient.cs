@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Authentication;
-using System.Threading.Tasks;
-using BinanceExchange.API.Client.Interfaces;
+﻿using BinanceExchange.API.Client.Interfaces;
 using BinanceExchange.API.Enums;
 using BinanceExchange.API.Extensions;
 using BinanceExchange.API.Models.WebSocket;
@@ -10,6 +6,11 @@ using BinanceExchange.API.Models.WebSocket.Interfaces;
 using BinanceExchange.API.Utility;
 using log4net;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Authentication;
+using System.Threading.Tasks;
 using WebSocketSharp;
 using IWebSocketResponse = BinanceExchange.API.Models.WebSocket.Interfaces.IWebSocketResponse;
 
@@ -20,6 +21,8 @@ namespace BinanceExchange.API.Websockets
     /// </summary>
     public class AbstractBinanceWebSocketClient
     {
+        public delegate void OnMessageReceived(string message);
+
         protected SslProtocols SupportedProtocols { get; } = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
 
         /// <summary> 
@@ -108,6 +111,36 @@ namespace BinanceExchange.API.Websockets
             var endpoint = new Uri($"{CombinedWebsocketUri}={symbols}");
             return CreateBinanceWebSocket(endpoint, messageEventHandler);
         }
+        
+        /// <summary>
+        /// Connect to the Trades WebSocket
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="messageEventHandler"></param>
+        /// <returns></returns>https://github.com/glitch100/BinanceDotNet/issues
+        public Guid ConnectToTradesWebSocketCombined(string symbols, BinanceWebSocketMessageHandler<BinanceCombinedTradeData> messageEventHandler)
+        {
+            Guard.AgainstNullOrEmpty(symbols, nameof(symbols));
+            symbols = PrepareCombinedSymbols.CombinedTrade(symbols);
+            Logger.Debug("Connecting to Combined Trades Web Socket");
+            var endpoint = new Uri($"{CombinedWebsocketUri}/{symbols}");
+            return CreateBinanceWebSocket(endpoint, messageEventHandler);
+        }
+
+        /// <summary>
+        /// Connect to the Trades WebSocket
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="messageEventHandler"></param>
+        /// <returns></returns>https://github.com/glitch100/BinanceDotNet/issues
+        public Guid ConnectToDeptAndTradesWebSocketCombined(List<string> symbols, OnMessageReceived messageEventHandler)
+        {
+            var chanels = PrepareCombinedSymbols.CombinedDepthAndTrade(symbols);
+            Logger.Debug("Connecting to Combined Trades Web Socket");
+            var endpoint = new Uri($"{CombinedWebsocketUri}/{chanels}");
+            return CreateBinanceWebSocket(endpoint, messageEventHandler);
+        }
+
         /// <summary>
         /// Connect to the Combined Partial Depth WebSocket
         /// </summary>
@@ -136,21 +169,6 @@ namespace BinanceExchange.API.Websockets
             Guard.AgainstNullOrEmpty(symbol, nameof(symbol));
             Logger.Debug("Connecting to Trades Web Socket");
             var endpoint = new Uri($"{BaseWebsocketUri}/{symbol.ToLower()}@aggTrade");
-            return CreateBinanceWebSocket(endpoint, messageEventHandler);
-        }
-
-        /// <summary>
-        /// Connect to the Trades WebSocket
-        /// </summary>
-        /// <param name="symbol"></param>
-        /// <param name="messageEventHandler"></param>
-        /// <returns></returns>https://github.com/glitch100/BinanceDotNet/issues
-        public Guid ConnectToTradesWebSocketCombined(string symbols, BinanceWebSocketMessageHandler<BinanceCombinedTradeData> messageEventHandler)
-        {
-            Guard.AgainstNullOrEmpty(symbols, nameof(symbols));
-            symbols = PrepareCombinedSymbols.CombinedTrade(symbols);
-            Logger.Debug("Connecting to Combined Trades Web Socket");
-            var endpoint = new Uri($"{CombinedWebsocketUri}/{symbols}");
             return CreateBinanceWebSocket(endpoint, messageEventHandler);
         }
 
@@ -226,6 +244,27 @@ namespace BinanceExchange.API.Websockets
             return websocket.Id;
         }
 
+        private Guid CreateBinanceWebSocket(Uri endpoint, OnMessageReceived messageEventHandler)
+        {
+            var websocket = new BinanceWebSocket(endpoint.AbsoluteUri);
+
+            websocket.OnMessage += (sender, e) =>
+            {
+                messageEventHandler(e.Data);
+            };
+
+            if (!ActiveWebSockets.ContainsKey(websocket.Id))
+            {
+                ActiveWebSockets.Add(websocket.Id, websocket);
+            }
+
+            AllSockets.Add(websocket);
+            websocket.SslConfiguration.EnabledSslProtocols = SupportedProtocols;
+            websocket.Connect();
+
+            return websocket.Id;
+        }
+
         private Guid CreateBinanceWebSocket<T>(Uri endpoint, BinanceWebSocketMessageHandler<T> messageEventHandler) where T : IWebSocketResponse
         {
             var websocket = new BinanceWebSocket(endpoint.AbsoluteUri);
@@ -284,6 +323,13 @@ namespace BinanceExchange.API.Websockets
             else
             {
                 throw new Exception($"No Websocket exists with the Id {id.ToString()}");
+            }
+        }
+
+        public void CloseWebSocketInstances() {
+            foreach (var id in ActiveWebSockets.Select(s => s.Key).ToList())
+            {
+                CloseWebSocketInstance(id);
             }
         }
 

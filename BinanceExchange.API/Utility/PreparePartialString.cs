@@ -1,4 +1,7 @@
-﻿namespace BinanceExchange.API.Utility
+﻿using BinanceExchange.API.Enums;
+using System.Collections.Generic;
+
+namespace BinanceExchange.API.Utility
 {
     public class PrepareCombinedSymbols
     {
@@ -33,6 +36,16 @@
             }
 
             return allPairs = string.Join("", allPairsArray);
+        }
+
+        public static string CombinedDepthAndTrade(List<string> instruments)
+        {
+            var list = new List<string>();
+            foreach (var instrument in instruments)
+            {
+                list.Add($"{instrument.ToLower()}@depth/{instrument.ToLower()}@trade/");
+            }
+            return string.Join("", list);
         }
     }
 }

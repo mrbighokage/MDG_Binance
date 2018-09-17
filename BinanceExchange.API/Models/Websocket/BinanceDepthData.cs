@@ -28,15 +28,19 @@ namespace BinanceExchange.API.Models.WebSocket
         public string Symbol { get; set; }
 
         [DataMember(Order = 4)]
-        [JsonProperty(PropertyName = "u")]
-        public long UpdateId { get; set; }
+        [JsonProperty(PropertyName = "U")]
+        public long FirstUpdateId { get; set; }
 
         [DataMember(Order = 5)]
+        [JsonProperty(PropertyName = "u")]
+        public long FinalUpdateId { get; set; }
+
+        [DataMember(Order = 6)]
         [JsonProperty(PropertyName = "b")]
         [JsonConverter(typeof(TraderPriceConverter))]
         public List<TradeResponse> BidDepthDeltas { get; set; }
 
-        [DataMember(Order = 6)]
+        [DataMember(Order = 7)]
         [JsonProperty(PropertyName = "a")]
         [JsonConverter(typeof(TraderPriceConverter))]
         public List<TradeResponse> AskDepthDeltas { get; set; }
