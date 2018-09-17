@@ -1,23 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <Version>4.5.0</Version>
-    <Description>The Binance CryptoCurrency exchange C# wrapper of the API. It is built in dotnet core, supports all REST and WebSocket endpoints, has full logging capabilities, a built in Cache for selected endpoints, a Rate limiter and more. Enjoy Binance API data, fast and reliably.</Description>
+    <Version>1</Version>
+    <Description>Fork package https://github.com/binance-exchange/BinanceDotNet &amp; adaptive for MDG</Description>
     <Title>Binance Cryptocurrency Exchange - C# API in .NET</Title>
-    <PackageId>BinanceDotNet</PackageId>
-    <Authors>Jon Evans</Authors>
+    <PackageId>MDG.BinanceDotNet</PackageId>
+    <Authors>mrbighokage</Authors>
     <Company />
-    <Product>BinanceDotNet</Product>
-    <PackageProjectUrl>https://github.com/glitch100/BinanceDotNet</PackageProjectUrl>
+    <Product>MDG.BinanceDotNet</Product>
+    <PackageProjectUrl>https://github.com/mrbighokage/MDG_Binance.API</PackageProjectUrl>
     <PackageTags>binance, csharp, binance-api, binancedotnet, binance exchange</PackageTags>
     <AssemblyName>BinanceExchange.API</AssemblyName>
-    <PackageLicenseUrl>https://github.com/glitch100/BinanceDotNet/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/glitch100/BinanceDotNet</RepositoryUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/mrbighokage/MDG_Binance.API</RepositoryUrl>
     <PackageIconUrl>https://i.imgur.com/x2YPVe6.png</PackageIconUrl>
-    <PackageReleaseNotes>Added new ssl security types and IsAlive method</PackageReleaseNotes>
-    <AssemblyVersion>4.5.0.0</AssemblyVersion>
-    <FileVersion>4.5.0.0</FileVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageReleaseNotes>WebSocket endpoints adaptive for MDG</PackageReleaseNotes>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>7.1</LangVersion>
