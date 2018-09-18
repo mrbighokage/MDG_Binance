@@ -1,8 +1,8 @@
 # BinanceDotNet <img src="https://i.imgur.com/x2YPVe6.png" width="56" />
 
 ## C# Wrapper for the official Binance exchange API
-<img src="https://img.shields.io/nuget/dt/BinanceDotNet.svg" />
-<img src="https://img.shields.io/nuget/v/BinanceDotNet.svg" />
+<img src="https://img.shields.io/nuget/dt/MDG.BinanceDotNet.svg" />
+<img src="https://img.shields.io/nuget/v/MDG.BinanceDotNet.svg" />
 
 Compatible with .NETSTANDARD2.0
 
