@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
-    <Version>1</Version>
+    <Version>1.1.0</Version>
     <Description>Fork package https://github.com/binance-exchange/BinanceDotNet &amp; adaptive for MDG</Description>
     <Title>Binance Cryptocurrency Exchange - C# API in .NET</Title>
     <PackageId>MDG.BinanceDotNet</PackageId>
@@ -9,14 +9,14 @@
     <Company />
     <Product>MDG.BinanceDotNet</Product>
     <PackageProjectUrl>https://github.com/mrbighokage/MDG_Binance.API</PackageProjectUrl>
-    <PackageTags>binance, csharp, binance-api, binancedotnet, binance exchange</PackageTags>
+    <PackageTags>binance, csharp, binance-api, binancedotnet, binance exchange, MDG</PackageTags>
     <AssemblyName>BinanceExchange.API</AssemblyName>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryUrl>https://github.com/mrbighokage/MDG_Binance.API</RepositoryUrl>
     <PackageIconUrl>https://i.imgur.com/x2YPVe6.png</PackageIconUrl>
     <PackageReleaseNotes>WebSocket endpoints adaptive for MDG</PackageReleaseNotes>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>

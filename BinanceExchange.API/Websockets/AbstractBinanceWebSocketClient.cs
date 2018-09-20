@@ -133,7 +133,7 @@ namespace BinanceExchange.API.Websockets
         /// <param name="symbol"></param>
         /// <param name="messageEventHandler"></param>
         /// <returns></returns>https://github.com/glitch100/BinanceDotNet/issues
-        public Guid ConnectToDeptAndTradesWebSocketCombined(List<string> symbols, OnMessageReceived messageEventHandler)
+        public Guid ConnectToDepthAndTradesWebSocketCombined(List<string> symbols, OnMessageReceived messageEventHandler)
         {
             var chanels = PrepareCombinedSymbols.CombinedDepthAndTrade(symbols);
             Logger.Debug("Connecting to Combined Trades Web Socket");
