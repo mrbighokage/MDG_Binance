@@ -22,7 +22,7 @@ https://www.nuget.org/packages/MDG.BinanceDotNet/
 Install-Package MDG.BinanceDotNet -Version 1.0.0
 ```
 
-## I had some problems with official implementation so I recommend using a pure socket client or using an asynchronous overlay:
+## I had some problems with official implementation so I recommend using a pure socket client or using an asynchronous overlay ClientWebSocketWrapper
 [ClientWebSocketWrapper](https://github.com/mrbighokage/ClientWebSocketWrapper.DotNet)
 
 
