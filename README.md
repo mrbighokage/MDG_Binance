@@ -13,11 +13,11 @@ Feel free to raise issues and Pull Request to help improve the library. If you f
 - [REST API Calls](https://github.com/binance-exchange/BinanceDotNet/blob/master/docs/REST-API.md)
 - [WebSocket API Calls](https://github.com/binance-exchange/BinanceDotNet/blob/master/docs/WEBSOCKET-API.md)
 
-## Installation
+## Installation (warning does not stable)
 The package is available in NuGet, or feel free to download:
 https://www.nuget.org/packages/MDG.BinanceDotNet/
 
-**Nuget PM**
+**Nuget PM** (warning does not stable)
 ```
 Install-Package MDG.BinanceDotNet -Version 1.0.0
 ```
